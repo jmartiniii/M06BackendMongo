@@ -1,24 +1,16 @@
 <html lang="en">
-
+    
     <%- include('./partials/head.ejs') %>
 
     <body>
 
         <%- include('./partials/nav.ejs') %>
 
-        <div class="blogs content">
-            <h2>All Blogs</h2>
-            
-            <% if (blogs.length > 0) { %>
-                <% blogs.forEach(blog => { %>
-                    <a class="single" href="/blogs/<%= blog._id %>">
-                        <h3 class="title"><%= blog.title %></h3>
-                        <p class="snippet"><%= blog.snippet %></p>
-                    </a>
-                <% }) %>
-            <% } else { %>
-                <p>There are no blogs to display.</p>
-            <% } %>
+        <div class="about content">
+            <h2>Home</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
 
         <%- include('./partials/footer.ejs') %>

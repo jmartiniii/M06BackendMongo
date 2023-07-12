@@ -8,11 +8,11 @@
         <%- include('./partials/nav.ejs') %>
 
         <div class="details content">
-            <h2><%= blog.title %></h2>
+            <h2><%= course.title %></h2>
             <div class="content">
-                <p><%= blog.body %></p>
+                <p><%= course.desc %></p>
             </div>
-            <a class="delete" data-doc="<%= blog._id %>">delete</a>
+            <a class="delete" data-doc="<%= course._id %>">delete</a>
         </div>
 
         <%- include('./partials/footer.ejs') %>
@@ -21,7 +21,7 @@
             const trashcan = document.querySelector('a.delete');
 
             trashcan.addEventListener('click', (e) => {
-                const endpoint = `/blogs/${trashcan.dataset.doc}`;
+                const endpoint = `/courses/${trashcan.dataset.doc}`;
 
                 fetch(endpoint, {
                     method: 'DELETE'

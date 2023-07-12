@@ -1,13 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const Blog = require('./models/blog')
+const Course = require('./models/course')
 
 // express app
 const app = express();
 
 // connect to mongodb
-const dbURI = 'mongodb+srv://john:pass1234@nodetuts.bbmt8ky.mongodb.net/node-tuts?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://john:pass1234@nodetuts.bbmt8ky.mongodb.net/courses?retryWrites=true&w=majority';
 mongoose.connect(dbURI)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err))
@@ -23,20 +23,20 @@ app.use(morgan('dev'));
 // routes
 // index
 app.get('/', (req, res) => {
-    res.redirect('/blogs');
+    res.render('index', { title: 'Home'});
 });
 
-// about
-app.get('/about', (req, res) => {
-    res.render('about', { title: 'About' });
+// login
+app.get('/login', (req, res) => {
+    res.render('login', { title: 'Login' });
 });
 
-// blog routes
-// blogs
-app.get('/blogs', (req, res) => {
-    Blog.find().sort({ createdAt: -1 })
+// course routes
+// courses
+app.get('/courses', (req, res) => {
+    Course.find().sort({ createdAt: -1 })
         .then((result) => {
-            res.render('index', {title: 'All Blogs', blogs: result})
+            res.render('courses', {title: 'All Courses', courses: result})
         })
         .catch((err) => {
             console.log(err);
@@ -44,41 +44,41 @@ app.get('/blogs', (req, res) => {
 });
 
 // post handler
-app.post('/blogs', (req, res) => {
-    const blog = new Blog(req.body);
+app.post('/courses', (req, res) => {
+    const course = new Course(req.body);
 
-    blog.save()
+    course.save()
         .then((result) => {
-            res.redirect('/blogs');
+            res.redirect('/courses');
         })
         .catch((err) => {
             console.log(err);
         })
 })
 
-// create blog
-app.get('/blogs/create', (req, res) => {
-    res.render('create', { title: 'Create a new blog' });
+// create course
+app.get('/courses/create', (req, res) => {
+    res.render('create', { title: 'Create Course' });
 });
 
-app.get('/blogs/:id', (req, res) => {
+app.get('/courses/:id', (req, res) => {
     const id = req.params.id;
-    Blog.findById(id)
+    Course.findById(id)
         .then(result => {
-            res.render('details', { blog: result, title: 'Blog Details'});
+            res.render('details', { course: result, title: 'Course Details'});
         })
         .catch(err => {
             console.log(err);
         });
 })
 
-// delete blog
-app.delete('/blogs/:id', (req, res) => {
+// delete course
+app.delete('/courses/:id', (req, res) => {
     const id = req.params.id;
 
-    Blog.findByIdAndDelete(id)
+    Course.findByIdAndDelete(id)
         .then(result => {
-            res.json({ redirect: '/blogs' });
+            res.json({ redirect: '/courses' });
         })
         .catch(err => {
             console.log(err);
